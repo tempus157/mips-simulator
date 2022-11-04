@@ -3,7 +3,8 @@ import { NextSeo } from "next-seo";
 import { Box, Grid } from "@mui/material";
 import Title from "@/components/Title";
 import Toolbar from "@/components/Toolbar";
-import UtilityCard from "@/components/UtilityCard";
+import RegisterCard from "@/components/RegisterCard";
+import MemoryCard from "@/components/MemoryCard";
 
 const Home: NextPage = () => {
 	return (
@@ -13,19 +14,19 @@ const Home: NextPage = () => {
 				description="MIPS Simulator with a pipeline"
 			/>
 			<Title text="MIPS Simulator" />
-			<Box m="auto" p={1} pt={0} maxWidth={720}>
+			<Box m="auto" pl={1} pr={1} maxWidth={720}>
 				<Grid container spacing={1} justifyContent="center">
 					<Grid item width="50%">
-						<UtilityCard />
+						<RegisterCard />
 					</Grid>
 					<Grid item width="50%">
-						<UtilityCard />
+						<RegisterCard />
 					</Grid>
 					<Grid item width="100%">
-						<UtilityCard />
+						<MemoryCard />
 					</Grid>
 					<Grid item width="100%">
-						<UtilityCard />
+						<MemoryCard />
 					</Grid>
 				</Grid>
 			</Box>
