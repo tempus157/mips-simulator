@@ -4,7 +4,7 @@ const UtilityCard = () => {
 	return (
 		<Card>
 			<CardContent>
-				<Typography>Hello, world!asdfasdfasdfasdfasdfsa</Typography>
+				<Typography>Hello, world!asdfasd fasdfa sdfasdfsa</Typography>
 			</CardContent>
 		</Card>
 	);
