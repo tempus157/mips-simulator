@@ -1,3 +1,13 @@
 {
-	"cSpell.words": ["funct", "shamt"]
+	"cSpell.words": [
+		"addi",
+		"addiu",
+		"addu",
+		"andi",
+		"funct",
+		"shamt",
+		"slti",
+		"sltiu",
+		"sltu"
+	]
 }

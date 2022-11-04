@@ -56,7 +56,7 @@ const getImmediate = (immediate: string) => {
 	return result;
 };
 
-const RegisterFormat: Translator = (instruction: string[]) => {
+const registerFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
 	}
@@ -70,7 +70,7 @@ const RegisterFormat: Translator = (instruction: string[]) => {
 	);
 };
 
-const ShiftFormat: Translator = (instruction: string[]) => {
+const shiftFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
 	}
@@ -84,7 +84,7 @@ const ShiftFormat: Translator = (instruction: string[]) => {
 	);
 };
 
-const ImmediateFormat: Translator = (instruction: string[]) => {
+const immediateFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
 	}
@@ -97,7 +97,7 @@ const ImmediateFormat: Translator = (instruction: string[]) => {
 	);
 };
 
-const TransferFormat: Translator = (instruction: string[]) => {
+const dataFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
 	}
@@ -110,7 +110,7 @@ const TransferFormat: Translator = (instruction: string[]) => {
 	);
 };
 
-const JumpFormat: Translator = (instruction: string[]) => {
+const jumpFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 2) {
 		throw new Error("Invalid instruction");
 	}
@@ -122,28 +122,28 @@ const JumpFormat: Translator = (instruction: string[]) => {
 };
 
 const translatorMap = new Map<string, Translator>([
-	["add", RegisterFormat],
-	["addi", ImmediateFormat],
-	["addiu", ImmediateFormat],
-	["addu", RegisterFormat],
-	["and", RegisterFormat],
-	["andi", ImmediateFormat],
-	["beq", ImmediateFormat],
-	["bne", ImmediateFormat],
-	["j", JumpFormat],
-	["jal", JumpFormat],
-	["jr", RegisterFormat],
-	["lui", ImmediateFormat],
-	["lw", TransferFormat],
-	["nor", RegisterFormat],
-	["or", RegisterFormat],
-	["ori", ImmediateFormat],
-	["slt", RegisterFormat],
-	["slti", ImmediateFormat],
-	["sltiu", ImmediateFormat],
-	["sltu", RegisterFormat],
-	["sll", ShiftFormat],
-	["srl", ShiftFormat],
-	["sw", TransferFormat],
-	["sub", RegisterFormat],
+	["add", registerFormat],
+	["addi", immediateFormat],
+	["addiu", immediateFormat],
+	["addu", registerFormat],
+	["and", registerFormat],
+	["andi", immediateFormat],
+	["beq", immediateFormat],
+	["bne", immediateFormat],
+	["j", jumpFormat],
+	["jal", jumpFormat],
+	["jr", registerFormat],
+	["lui", immediateFormat],
+	["lw", dataFormat],
+	["nor", registerFormat],
+	["or", registerFormat],
+	["ori", immediateFormat],
+	["slt", registerFormat],
+	["slti", immediateFormat],
+	["sltiu", immediateFormat],
+	["sltu", registerFormat],
+	["sll", shiftFormat],
+	["srl", shiftFormat],
+	["sw", dataFormat],
+	["sub", registerFormat],
 ]);
