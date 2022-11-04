@@ -83,17 +83,6 @@ const ImmediateFormat: Translator = (instruction: string[]) => {
 	);
 };
 
-const JumpFormat: Translator = (instruction: string[]) => {
-	if (instruction.length !== 2) {
-		throw new Error("Invalid instruction");
-	}
-
-	return (
-		(getOpcode(instruction[0]) << shift.opcode) |
-		getImmediate(instruction[1])
-	);
-};
-
 const TransferFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
@@ -104,6 +93,17 @@ const TransferFormat: Translator = (instruction: string[]) => {
 		(getRegister(instruction[3]) << shift.rs) |
 		(getRegister(instruction[1]) << shift.rt) |
 		getImmediate(instruction[2])
+	);
+};
+
+const JumpFormat: Translator = (instruction: string[]) => {
+	if (instruction.length !== 2) {
+		throw new Error("Invalid instruction");
+	}
+
+	return (
+		(getOpcode(instruction[0]) << shift.opcode) |
+		getImmediate(instruction[1])
 	);
 };
 
