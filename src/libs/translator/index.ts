@@ -56,7 +56,7 @@ const getImmediate = (immediate: string) => {
 	return result;
 };
 
-const RFormatTranslator: Translator = (instruction: string[]) => {
+const RegisterFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
 	}
@@ -70,7 +70,7 @@ const RFormatTranslator: Translator = (instruction: string[]) => {
 	);
 };
 
-const IFormatTranslator: Translator = (instruction: string[]) => {
+const ImmediateFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
 	}
@@ -83,7 +83,53 @@ const IFormatTranslator: Translator = (instruction: string[]) => {
 	);
 };
 
+const JumpFormat: Translator = (instruction: string[]) => {
+	if (instruction.length !== 2) {
+		throw new Error("Invalid instruction");
+	}
+
+	return (
+		(getOpcode(instruction[0]) << shift.opcode) |
+		getImmediate(instruction[1])
+	);
+};
+
+const TransferFormat: Translator = (instruction: string[]) => {
+	if (instruction.length !== 4) {
+		throw new Error("Invalid instruction");
+	}
+
+	return (
+		(getOpcode(instruction[0]) << shift.opcode) |
+		(getRegister(instruction[3]) << shift.rs) |
+		(getRegister(instruction[1]) << shift.rt) |
+		getImmediate(instruction[2])
+	);
+};
+
 const translatorMap = new Map<string, Translator>([
-	["add", RFormatTranslator],
-	["addi", IFormatTranslator],
+	["add", RegisterFormat],
+	["addi", ImmediateFormat],
+	["addiu", ImmediateFormat],
+	["addu", RegisterFormat],
+	["and", RegisterFormat],
+	["andi", ImmediateFormat],
+	["beq", ImmediateFormat],
+	["bne", ImmediateFormat],
+	["j", JumpFormat],
+	["jal", JumpFormat],
+	["jr", RegisterFormat],
+	["lui", ImmediateFormat],
+	["lw", TransferFormat],
+	["nor", RegisterFormat],
+	["or", RegisterFormat],
+	["ori", ImmediateFormat],
+	["slt", RegisterFormat],
+	["slti", ImmediateFormat],
+	["sltiu", ImmediateFormat],
+	["sltu", RegisterFormat],
+	["sll", RegisterFormat],
+	["srl", RegisterFormat],
+	["sw", TransferFormat],
+	["sub", RegisterFormat],
 ]);
