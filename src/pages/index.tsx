@@ -1,8 +1,17 @@
 import type { NextPage } from "next";
-import { Button } from "@mui/material";
+import { NextSeo } from "next-seo";
+import TitleBar from "@/components/TitleBar";
 
 const Home: NextPage = () => {
-	return <Button variant="contained">Hello, world!</Button>;
+	return (
+		<>
+			<NextSeo
+				title="MIPS Simulator - Tempus.js"
+				description="MIPS Simulator with a pipeline"
+			/>
+			<TitleBar text="MIPS Simulator" />
+		</>
+	);
 };
 
 export default Home;

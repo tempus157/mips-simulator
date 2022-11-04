@@ -1,12 +1,13 @@
 import type { AppProps } from "next/app";
+import { useMemo } from "react";
 import Head from "next/head";
+
 import {
 	createTheme,
 	CssBaseline,
 	ThemeProvider,
 	useMediaQuery,
 } from "@mui/material";
-import { useMemo } from "react";
 
 const App = ({ Component, pageProps }: AppProps) => {
 	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
