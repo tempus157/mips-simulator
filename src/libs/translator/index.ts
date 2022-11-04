@@ -70,6 +70,20 @@ const RegisterFormat: Translator = (instruction: string[]) => {
 	);
 };
 
+const ShiftFormat: Translator = (instruction: string[]) => {
+	if (instruction.length !== 4) {
+		throw new Error("Invalid instruction");
+	}
+
+	return (
+		(getOpcode(instruction[0]) << shift.opcode) |
+		(getRegister(instruction[2]) << shift.rt) |
+		(getRegister(instruction[1]) << shift.rd) |
+		(getImmediate(instruction[3]) << shift.shamt) |
+		getFunct(instruction[0])
+	);
+};
+
 const ImmediateFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
@@ -128,8 +142,8 @@ const translatorMap = new Map<string, Translator>([
 	["slti", ImmediateFormat],
 	["sltiu", ImmediateFormat],
 	["sltu", RegisterFormat],
-	["sll", RegisterFormat],
-	["srl", RegisterFormat],
+	["sll", ShiftFormat],
+	["srl", ShiftFormat],
 	["sw", TransferFormat],
 	["sub", RegisterFormat],
 ]);
