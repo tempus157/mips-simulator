@@ -26,6 +26,28 @@ const getImmediate = (immediate: string) => {
 	return result;
 };
 
+const getFunct = (funct: string) => {
+	const result = functMap.get(funct);
+	if (result === undefined) {
+		throw new Error(`Invalid funct: ${funct}`);
+	}
+	return result;
+};
+
+const RFormatTranslator: Translator = (instruction: string[]) => {
+	if (instruction.length !== 4) {
+		throw new Error("Invalid instruction");
+	}
+
+	return (
+		(getOpcode(instruction[0]) << shift.opcode) |
+		(getRegister(instruction[2]) << shift.rs) |
+		(getRegister(instruction[3]) << shift.rt) |
+		(getRegister(instruction[1]) << shift.rd) |
+		getFunct(instruction[0])
+	);
+};
+
 const IFormatTranslator: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
 		throw new Error("Invalid instruction");
@@ -38,12 +60,15 @@ const IFormatTranslator: Translator = (instruction: string[]) => {
 		getImmediate(instruction[3])
 	);
 };
-
 const translatorMap = new Map<string, Translator>([
+	["add", RFormatTranslator],
 	["addi", IFormatTranslator],
 ]);
 
-const opcodeMap = new Map<string, number>([["addi", 0b001000]]);
+const opcodeMap = new Map<string, number>([
+	["add", 0b000000],
+	["addi", 0b001000],
+]);
 
 const registerMap = new Map<string, number>([
 	["$zero", 0],
@@ -80,10 +105,14 @@ const registerMap = new Map<string, number>([
 	["$ra", 31],
 ]);
 
+const functMap = new Map<string, number>([["add", 0b100000]]);
+
 const shift = {
 	opcode: 26,
 	rs: 21,
 	rt: 16,
+	rd: 11,
+	shamt: 6,
 } as const;
 
 export const translateInstruction = (instructionText: string) => {

@@ -5,7 +5,8 @@ import { translateInstruction } from "@/libs/translator";
 import { Typography } from "@mui/material";
 
 const Home: NextPage = () => {
-	const instruction = translateInstruction("addi $t0, $zero, 16");
+	const add = translateInstruction("add $t0, $t1, $t2");
+	const addi = translateInstruction("addi $t0, $zero, 16");
 
 	return (
 		<>
@@ -14,7 +15,8 @@ const Home: NextPage = () => {
 				description="MIPS Simulator with a pipeline"
 			/>
 			<TitleBar text="MIPS Simulator" />
-			<Typography>{instruction.toString(2)}</Typography>
+			<Typography>{add.toString(2)}</Typography>
+			<Typography>{addi.toString(2)}</Typography>
 		</>
 	);
 };
