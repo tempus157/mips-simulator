@@ -1,6 +1,29 @@
 export const opcodeMap = new Map<string, number>([
 	["add", 0b000000],
 	["addi", 0b001000],
+	["addiu", 0b001001],
+	["addu", 0b000000],
+	["and", 0b000000],
+	["andi", 0b001100],
+	["beq", 0b000100],
+	["bne", 0b000101],
+	["j", 0b000010],
+	["jal", 0b000011],
+	["jr", 0b000000],
+	["lui", 0b001111],
+	["lw", 0b100011],
+	["nor", 0b000000],
+	["or", 0b000000],
+	["ori", 0b001101],
+	["slt", 0b000000],
+	["slti", 0b001010],
+	["sltiu", 0b001011],
+	["sltu", 0b000000],
+	["sll", 0b000000],
+	["srl", 0b000000],
+	["sw", 0b101011],
+	["sub", 0b000000],
+	["subu", 0b000000],
 ]);
 
 export const registerMap = new Map<string, number>([
@@ -38,7 +61,20 @@ export const registerMap = new Map<string, number>([
 	["$ra", 31],
 ]);
 
-export const functMap = new Map<string, number>([["add", 0b100000]]);
+export const functMap = new Map<string, number>([
+	["add", 0b100000],
+	["addu", 0b100001],
+	["and", 0b100100],
+	["jr", 0b001000],
+	["nor", 0b100111],
+	["or", 0b100101],
+	["slt", 0b101010],
+	["sltu", 0b101011],
+	["sll", 0b000000],
+	["srl", 0b000010],
+	["sub", 0b100010],
+	["subu", 0b100011],
+]);
 
 export const shift = {
 	opcode: 26,
