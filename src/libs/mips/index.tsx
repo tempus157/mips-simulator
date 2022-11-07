@@ -5,20 +5,21 @@ import {
 	useContext,
 	useReducer,
 } from "react";
-import { loadSrc, reset, run, State, step } from "@/libs/mips/simulator";
+
+import {
+	defaultValue,
+	loadSrc,
+	reset,
+	run,
+	State,
+	step,
+} from "@/libs/mips/simulator";
 
 type Action =
 	| { type: "LOAD"; src: string }
 	| { type: "RESET" }
 	| { type: "RUN" }
 	| { type: "STEP" };
-
-const defaultValue: State = {
-	programCounter: 0,
-	register: [0, 0, 0, 0, 0, 0, 0, 0],
-	dataMemory: [],
-	textMemory: [],
-};
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {

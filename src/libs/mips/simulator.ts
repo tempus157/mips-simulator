@@ -7,6 +7,13 @@ export interface State {
 	textMemory: number[];
 }
 
+export const defaultValue: State = {
+	programCounter: 0,
+	register: [0, 0, 0, 0, 0, 0, 0, 0],
+	dataMemory: [],
+	textMemory: [],
+};
+
 export const loadSrc = (state: State, src: string): State => {
 	const textMemory = src
 		.split(" ")
@@ -14,9 +21,12 @@ export const loadSrc = (state: State, src: string): State => {
 	return { ...state, textMemory };
 };
 
-// TODO: Implement
 export const reset = (state: State): State => {
-	return state;
+	return {
+		...state,
+		programCounter: defaultValue.programCounter,
+		register: defaultValue.register,
+	};
 };
 
 // TODO: Implement
