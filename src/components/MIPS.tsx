@@ -14,13 +14,28 @@ interface State {
 }
 
 type Action =
+	| { type: "RESET" }
 	| { type: "PC"; value: number }
 	| { type: "REG"; index: number; value: number }
 	| { type: "DATA"; index: number; value: number }
 	| { type: "TEXT"; index: number; value: number };
 
+const defaultValue: State = {
+	programCounter: 0,
+	register: [0, 0, 0, 0, 0, 0, 0, 0],
+	dataMemory: [],
+	textMemory: [],
+};
+
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
+		case "RESET": {
+			return {
+				...state,
+				programCounter: defaultValue.programCounter,
+				register: defaultValue.register,
+			};
+		}
 		case "PC": {
 			return { ...state, programCounter: action.value };
 		}
@@ -60,12 +75,7 @@ export const useMIPS = (): [State, Dispatch<Action>] => {
 };
 
 const MIPS = ({ children }: PropsWithChildren) => {
-	const [state, dispatch] = useReducer(reducer, {
-		programCounter: 0,
-		register: [0, 0, 0, 0, 0, 0, 0, 0],
-		dataMemory: [],
-		textMemory: [],
-	});
+	const [state, dispatch] = useReducer(reducer, defaultValue);
 
 	return (
 		<StateContext.Provider value={state}>
