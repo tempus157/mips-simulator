@@ -5,20 +5,13 @@ import {
 	useContext,
 	useReducer,
 } from "react";
-
-interface State {
-	programCounter: number;
-	register: number[];
-	dataMemory: number[];
-	textMemory: number[];
-}
+import { loadSrc, reset, run, State, step } from "@/libs/mips/simulator";
 
 type Action =
+	| { type: "LOAD"; src: string }
 	| { type: "RESET" }
-	| { type: "PC"; value: number }
-	| { type: "REG"; index: number; value: number }
-	| { type: "DATA"; index: number; value: number }
-	| { type: "TEXT"; index: number; value: number };
+	| { type: "RUN" }
+	| { type: "STEP" };
 
 const defaultValue: State = {
 	programCounter: 0,
@@ -29,34 +22,16 @@ const defaultValue: State = {
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
-		case "RESET": {
-			return {
-				...state,
-				programCounter: defaultValue.programCounter,
-				register: defaultValue.register,
-			};
-		}
-		case "PC": {
-			return { ...state, programCounter: action.value };
-		}
-		case "REG": {
-			const register = [...state.register];
-			register[action.index] = action.value;
-			return { ...state, register };
-		}
-		case "DATA": {
-			const dataMemory = [...state.dataMemory];
-			dataMemory[action.index] = action.value;
-			return { ...state, dataMemory };
-		}
-		case "TEXT": {
-			const textMemory = [...state.textMemory];
-			textMemory[action.index] = action.value;
-			return { ...state, textMemory };
-		}
-		default: {
+		case "LOAD":
+			return loadSrc(state, action.src);
+		case "RESET":
+			return reset(state);
+		case "RUN":
+			return run(state);
+		case "STEP":
+			return step(state);
+		default:
 			throw new Error("Invalid action");
-		}
 	}
 };
 

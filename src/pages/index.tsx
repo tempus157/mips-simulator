@@ -5,7 +5,7 @@ import Title from "@/components/Title";
 import Toolbar from "@/components/Toolbar";
 import RegisterCard from "@/components/RegisterCard";
 import MemoryCard from "@/components/MemoryCard";
-import MIPS from "@/components/MIPS";
+import MIPS from "@/libs/mips";
 
 const Home: NextPage = () => {
 	return (
