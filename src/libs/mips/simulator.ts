@@ -8,11 +8,10 @@ export interface State {
 }
 
 export const loadSrc = (state: State, src: string): State => {
-	state.textMemory = [];
-	src.split(" ")
-		.map((instructionText) => translateInstruction(instructionText))
-		.forEach((instruction) => state.textMemory.push(instruction));
-	return state;
+	const textMemory = src
+		.split(" ")
+		.map((instructionText) => translateInstruction(instructionText));
+	return { ...state, textMemory };
 };
 
 // TODO: Implement
