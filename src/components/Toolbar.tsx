@@ -18,6 +18,8 @@ const Toolbar = () => {
 		if (!file) {
 			return;
 		}
+
+		dispatch({ type: "RESET" });
 		dispatch({ type: "LOAD", src: await file.text() });
 	};
 
