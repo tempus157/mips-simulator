@@ -1,17 +1,17 @@
 import { load, reset, run, step } from "./actions";
 import { withException } from "./exception";
 
-export type MIPS = {
+export interface MIPS {
 	programCounter: number;
 	register: number[];
 	dataMemory: number[];
 	textMemory: number[];
-};
+}
 
-export type MIPSError = {
+export interface MIPSError {
 	error: boolean;
 	message: string;
-};
+}
 
 export const defaultValue: MIPS & MIPSError = {
 	programCounter: 0,
