@@ -12,15 +12,13 @@ import {
 	MIPSAction,
 	MIPSError,
 	MIPSErrorAction,
-	MIPSWithError,
-	MIPSWithErrorAction,
 	reducer,
 } from "./reducer";
 
-const StateContext = createContext<MIPSWithError | null>(null);
-const DispatchContext = createContext<Dispatch<MIPSWithErrorAction> | null>(
-	null
-);
+const StateContext = createContext<(MIPS & MIPSError) | null>(null);
+const DispatchContext = createContext<Dispatch<
+	MIPSAction | MIPSErrorAction
+> | null>(null);
 
 export const useMIPS = (): [MIPS, Dispatch<MIPSAction>] => {
 	const stateContext = useContext(StateContext);

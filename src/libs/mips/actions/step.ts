@@ -1,6 +1,6 @@
-import { MIPSWithError } from "../reducer";
+import { MIPS } from "../reducer";
 
 // TODO: Implement
-export const step = (state: MIPSWithError): MIPSWithError => {
-	return state;
+export const step = (mips: MIPS): MIPS => {
+	return mips;
 };

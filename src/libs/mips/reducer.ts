@@ -1,4 +1,5 @@
-import { occur, load, reset, run, step, resolve } from "./actions";
+import { load, reset, run, step } from "./actions";
+import { withException } from "./exception";
 
 export type MIPS = {
 	programCounter: number;
@@ -12,9 +13,7 @@ export type MIPSError = {
 	message: string;
 };
 
-export type MIPSWithError = MIPS & MIPSError;
-
-export const defaultValue: MIPSWithError = {
+export const defaultValue: MIPS & MIPSError = {
 	programCounter: 0,
 	register: [0, 0, 0, 0, 0, 0, 0, 0],
 	dataMemory: [],
@@ -33,39 +32,24 @@ export type MIPSErrorAction =
 	| { type: "OCCUR"; message: string }
 	| { type: "RESOLVE" };
 
-export type MIPSWithErrorAction = MIPSAction | MIPSErrorAction;
-
 export const reducer = (
-	state: MIPSWithError,
-	action: MIPSWithErrorAction
-): MIPSWithError => {
+	state: MIPS & MIPSError,
+	action: MIPSAction | MIPSErrorAction
+): MIPS & MIPSError => {
 	switch (action.type) {
+		case "LOAD":
+			return withException(state, () => load(state, action.files));
+		case "RESET":
+			return withException(state, () => reset(state));
+		case "RUN":
+			return withException(state, () => run(state));
+		case "STEP":
+			return withException(state, () => step(state));
 		case "OCCUR":
-			return occur(state, action.message);
+			return { ...state, error: true, message: action.message };
 		case "RESOLVE":
-			return resolve(state);
-	}
-
-	try {
-		switch (action.type) {
-			case "LOAD":
-				return load(state, action.files);
-			case "RESET":
-				return reset(state);
-			case "RUN":
-				return run(state);
-			case "STEP":
-				return step(state);
-		}
-	} catch (error) {
-		if (error instanceof Error) {
-			return occur(state, error.message);
-		} else {
-			console.error(error);
-			return occur(
-				state,
-				"An unknown error has occurred! See the console for details."
-			);
-		}
+			return { ...state, error: false };
+		default:
+			throw new Error("Unknown action type");
 	}
 };
