@@ -1,7 +1,7 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 
-const MemoryCard = () => {
-	return (
+const MIPSCard = () => {
+	const tempCard = (
 		<Card>
 			<CardContent>
 				<Typography>[00400000] 8fa40000 lw $4, 0($29)</Typography>
@@ -29,6 +29,25 @@ const MemoryCard = () => {
 			</CardContent>
 		</Card>
 	);
+
+	return (
+		<Box m="auto" pl={1} pr={1} maxWidth={720}>
+			<Grid container spacing={1} justifyContent="center">
+				<Grid item width="50%">
+					{tempCard}
+				</Grid>
+				<Grid item width="50%">
+					{tempCard}
+				</Grid>
+				<Grid item width="100%">
+					{tempCard}
+				</Grid>
+				<Grid item width="100%">
+					{tempCard}
+				</Grid>
+			</Grid>
+		</Box>
+	);
 };
 
-export default MemoryCard;
+export default MIPSCard;

@@ -6,7 +6,7 @@ export const DispatchContext = createContext<Dispatch<
 	MIPSAction | MIPSErrorAction
 > | null>(null);
 
-export const useMIPSCard = (): MIPS => {
+export const useMIPS = (): MIPS => {
 	const state = useContext(StateContext);
 
 	if (!state) {
@@ -36,7 +36,7 @@ export const useMIPSDialog = () => {
 		return {
 			error: state.error,
 			message: state.message,
-			resolve: () => dispatch({ type: "RESOLVE" }),
+			close: () => dispatch({ type: "CLOSE" }),
 		};
 	}
 };

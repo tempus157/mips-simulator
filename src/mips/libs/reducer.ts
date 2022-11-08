@@ -28,7 +28,7 @@ export type MIPSAction =
 	| { type: "RUN" }
 	| { type: "STEP" };
 
-export type MIPSErrorAction = { type: "RESOLVE" };
+export type MIPSErrorAction = { type: "CLOSE" };
 
 export const reducer = (
 	state: MIPS & MIPSError,
@@ -43,7 +43,7 @@ export const reducer = (
 			return withException(state, () => run(state));
 		case "STEP":
 			return withException(state, () => step(state));
-		case "RESOLVE":
+		case "CLOSE":
 			return { ...state, error: false };
 		default:
 			throw new Error("Unknown action type");

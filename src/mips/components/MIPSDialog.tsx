@@ -13,13 +13,13 @@ const MIPSDialog = () => {
 	const dialog = useMIPSDialog();
 
 	return (
-		<Dialog open={dialog.error} onClose={dialog.resolve}>
+		<Dialog open={dialog.error} onClose={dialog.close}>
 			<DialogTitle>An error occurred!</DialogTitle>
 			<DialogContent>
 				<DialogContentText>{dialog.message}</DialogContentText>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={dialog.resolve} autoFocus>
+				<Button onClick={dialog.close} autoFocus>
 					OK
 				</Button>
 			</DialogActions>
