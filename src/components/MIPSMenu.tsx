@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import { PlayArrow, SkipNext, Stop, Upload } from "@mui/icons-material";
-import { useMIPSDispatch } from "$/libs/context";
+import { useMIPSDispatch } from "$libs/mips/context";
 
 import {
 	AppBar,

@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { Typography } from "@mui/material";
-import MIPSProvider from "$/components/MIPSProvider";
-import MIPSCard from "$/components/MIPSCard";
-import MIPSMenu from "$/components/MIPSMenu";
-import MIPSDialog from "$/components/MIPSDialog";
+import MIPSProvider from "$components/MIPSProvider";
+import MIPSCard from "$components/MIPSCard";
+import MIPSMenu from "$components/MIPSMenu";
+import MIPSDialog from "$components/MIPSDialog";
 
 const Home: NextPage = () => {
 	return (

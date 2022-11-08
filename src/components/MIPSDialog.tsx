@@ -6,7 +6,7 @@ import {
 	DialogContentText,
 	DialogTitle,
 } from "@mui/material";
-import { useMIPSDialog } from "$/libs/context";
+import { useMIPSDialog } from "$libs/mips/context";
 
 const MIPSDialog = () => {
 	const dialog = useMIPSDialog();

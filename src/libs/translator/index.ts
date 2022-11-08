@@ -1,4 +1,4 @@
-import { MIPSError } from "$/mips/libs/error";
+import { MIPSError } from "$libs/mips/error";
 import { functMap, opcodeMap, registerMap, shift } from "./reference";
 
 interface Translator {
