@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { Box, Grid } from "@mui/material";
-import Title from "@/components/Title";
-import Toolbar from "@/components/Toolbar";
-import RegisterCard from "@/components/RegisterCard";
-import MemoryCard from "@/components/MemoryCard";
-import MIPSProvider from "@/libs/mips";
-import ErrorDialog from "@/components/ErrorDialog";
+import Title from "$/components/Title";
+import MIPSMenu from "$/mips/components/MIPSMenu";
+import RegisterCard from "$/components/RegisterCard";
+import MemoryCard from "$/components/MemoryCard";
+import MIPSProvider from "$/mips/components/MIPSProvider";
+import MIPSDialog from "$/mips/components/MIPSDialog";
 
 const Home: NextPage = () => {
 	return (
@@ -33,8 +33,8 @@ const Home: NextPage = () => {
 						</Grid>
 					</Grid>
 				</Box>
-				<Toolbar />
-				<ErrorDialog />
+				<MIPSMenu />
+				<MIPSDialog />
 			</MIPSProvider>
 		</>
 	);

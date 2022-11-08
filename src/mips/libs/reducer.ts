@@ -1,5 +1,5 @@
 import { load, reset, run, step } from "./actions";
-import { withException } from "./exception";
+import { withException } from "./error";
 
 export interface MIPS {
 	programCounter: number;
@@ -28,9 +28,7 @@ export type MIPSAction =
 	| { type: "RUN" }
 	| { type: "STEP" };
 
-export type MIPSErrorAction =
-	| { type: "OCCUR"; message: string }
-	| { type: "RESOLVE" };
+export type MIPSErrorAction = { type: "RESOLVE" };
 
 export const reducer = (
 	state: MIPS & MIPSError,
@@ -45,8 +43,6 @@ export const reducer = (
 			return withException(state, () => run(state));
 		case "STEP":
 			return withException(state, () => step(state));
-		case "OCCUR":
-			return { ...state, error: true, message: action.message };
 		case "RESOLVE":
 			return { ...state, error: false };
 		default:

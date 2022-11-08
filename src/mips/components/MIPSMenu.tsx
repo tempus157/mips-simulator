@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import { PlayArrow, SkipNext, Stop, Upload } from "@mui/icons-material";
-import { useMIPS } from "@/libs/mips";
+import { useMIPSMenu } from "$/mips/libs/context";
 
 import {
 	AppBar,
@@ -10,8 +10,8 @@ import {
 	Tooltip,
 } from "@mui/material";
 
-const Toolbar = () => {
-	const [mips, dispatch] = useMIPS();
+const MIPSMenu = () => {
+	const dispatch = useMIPSMenu();
 
 	const handleLoad = async (event: FormEvent<HTMLInputElement>) => {
 		const file = event.currentTarget.files?.[0];
@@ -60,4 +60,4 @@ const Toolbar = () => {
 	);
 };
 
-export default Toolbar;
+export default MIPSMenu;

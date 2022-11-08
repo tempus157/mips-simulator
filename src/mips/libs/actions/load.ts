@@ -1,5 +1,5 @@
 import { MIPS } from "../reducer";
-import { translateInstruction } from "@/libs/translator";
+import { translateInstruction } from "$/libs/translator";
 
 export const load = (mips: MIPS, src: string): MIPS => {
 	const textMemory = src
