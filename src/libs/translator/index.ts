@@ -9,8 +9,9 @@ export const translateInstruction = (instructionText: string) => {
 	const instruction = instructionText
 		.split(/[\s,()]+/)
 		.filter((text) => text.length > 0);
+
 	if (instruction.length === 0) {
-		throw new MIPSException("Invalid instruction");
+		throw new MIPSException("Empty instruction");
 	}
 
 	const translator = translatorMap.get(instruction[0]);
@@ -54,7 +55,7 @@ const getImmediate = (immediate: string) => {
 
 const registerFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException("Invalid instruction");
+		throw new MIPSException("Invalid register format");
 	}
 
 	return (
@@ -68,7 +69,7 @@ const registerFormat: Translator = (instruction: string[]) => {
 
 const shiftFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException("Invalid instruction");
+		throw new MIPSException("Invalid shift format");
 	}
 
 	return (
@@ -82,7 +83,7 @@ const shiftFormat: Translator = (instruction: string[]) => {
 
 const immediateFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException("Invalid instruction");
+		throw new MIPSException(`Invalid immediate format`);
 	}
 
 	return (
@@ -95,7 +96,7 @@ const immediateFormat: Translator = (instruction: string[]) => {
 
 const dataFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException("Invalid instruction");
+		throw new MIPSException("Invalid data format");
 	}
 
 	return (
@@ -108,7 +109,7 @@ const dataFormat: Translator = (instruction: string[]) => {
 
 const jumpFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 2) {
-		throw new MIPSException("Invalid instruction");
+		throw new MIPSException("Invalid jump format");
 	}
 
 	return (

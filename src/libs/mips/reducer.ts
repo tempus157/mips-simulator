@@ -23,7 +23,7 @@ export const defaultValue: MIPS & MIPSError = {
 };
 
 export type MIPSAction =
-	| { type: "LOAD"; files: FileList | null }
+	| { type: "LOAD"; src: string }
 	| { type: "RESET" }
 	| { type: "RUN" }
 	| { type: "STEP" };
@@ -38,7 +38,7 @@ export const reducer = (
 ): MIPS & MIPSError => {
 	switch (action.type) {
 		case "LOAD":
-			return withException(state, () => load(state, action.files));
+			return withException(state, () => load(state, action.src));
 		case "RESET":
 			return withException(state, () => reset(state));
 		case "RUN":

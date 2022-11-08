@@ -13,8 +13,12 @@ import {
 const Toolbar = () => {
 	const [mips, dispatch] = useMIPS();
 
-	const handleLoad = (e: FormEvent<HTMLInputElement>) => {
-		dispatch({ type: "LOAD", files: e.currentTarget.files });
+	const handleLoad = async (event: FormEvent<HTMLInputElement>) => {
+		const file = event.currentTarget.files?.[0];
+		if (!file) {
+			return;
+		}
+		dispatch({ type: "LOAD", src: await file.text() });
 	};
 
 	return (
