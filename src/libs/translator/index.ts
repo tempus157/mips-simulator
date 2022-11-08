@@ -3,7 +3,7 @@ import {
 	opcodeMap,
 	registerMap,
 	shift,
-} from "@/libs/translator/reference";
+} from "./reference";
 
 interface Translator {
 	(instruction: string[]): number;

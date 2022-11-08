@@ -6,14 +6,7 @@ import {
 	useReducer,
 } from "react";
 
-import {
-	defaultValue,
-	loadSrc,
-	reset,
-	run,
-	State,
-	step,
-} from "@/libs/mips/simulator";
+import { defaultValue, loadSrc, reset, run, State, step } from "./simulator";
 
 type Action =
 	| { type: "LOAD"; src: string }
