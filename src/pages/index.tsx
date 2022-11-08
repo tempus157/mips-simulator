@@ -5,7 +5,7 @@ import Title from "@/components/Title";
 import Toolbar from "@/components/Toolbar";
 import RegisterCard from "@/components/RegisterCard";
 import MemoryCard from "@/components/MemoryCard";
-import MIPS from "@/libs/mips";
+import MIPSProvider from "@/libs/mips";
 
 const Home: NextPage = () => {
 	return (
@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 				description="MIPS Simulator with a pipeline"
 			/>
 			<Title text="MIPS Simulator" />
-			<MIPS>
+			<MIPSProvider>
 				<Box m="auto" pl={1} pr={1} maxWidth={720}>
 					<Grid container spacing={1} justifyContent="center">
 						<Grid item width="50%">
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 					</Grid>
 				</Box>
 				<Toolbar />
-			</MIPS>
+			</MIPSProvider>
 		</>
 	);
 };

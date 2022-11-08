@@ -1,40 +1,40 @@
 import { translateInstruction } from "@/libs/translator";
 
-export interface State {
+export interface MIPS {
 	programCounter: number;
 	register: number[];
 	dataMemory: number[];
 	textMemory: number[];
 }
 
-export const defaultValue: State = {
+export const defaultValue: MIPS = {
 	programCounter: 0,
 	register: [0, 0, 0, 0, 0, 0, 0, 0],
 	dataMemory: [],
 	textMemory: [],
 };
 
-export const loadSrc = (state: State, src: string): State => {
+export const loadSrc = (mips: MIPS, src: string): MIPS => {
 	const textMemory = src
 		.split(" ")
 		.map((instructionText) => translateInstruction(instructionText));
-	return { ...state, textMemory };
+	return { ...mips, textMemory };
 };
 
-export const reset = (state: State): State => {
+export const reset = (mips: MIPS): MIPS => {
 	return {
-		...state,
+		...mips,
 		programCounter: defaultValue.programCounter,
 		register: defaultValue.register,
 	};
 };
 
 // TODO: Implement
-export const run = (state: State): State => {
-	return state;
+export const run = (mips: MIPS): MIPS => {
+	return mips;
 };
 
 // TODO: Implement
-export const step = (state: State): State => {
-	return state;
+export const step = (mips: MIPS): MIPS => {
+	return mips;
 };

@@ -6,7 +6,7 @@ import {
 	useReducer,
 } from "react";
 
-import { defaultValue, loadSrc, reset, run, State, step } from "./simulator";
+import { defaultValue, loadSrc, reset, run, step, MIPS } from "./simulator";
 
 type Action =
 	| { type: "LOAD"; src: string }
@@ -14,26 +14,26 @@ type Action =
 	| { type: "RUN" }
 	| { type: "STEP" };
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (mips: MIPS, action: Action): MIPS => {
 	switch (action.type) {
 		case "LOAD":
-			return loadSrc(state, action.src);
+			return loadSrc(mips, action.src);
 		case "RESET":
-			return reset(state);
+			return reset(mips);
 		case "RUN":
-			return run(state);
+			return run(mips);
 		case "STEP":
-			return step(state);
+			return step(mips);
 		default:
 			throw new Error("Invalid action");
 	}
 };
 
-const StateContext = createContext<State | null>(null);
+const MIPSContext = createContext<MIPS | null>(null);
 const DispatchContext = createContext<Dispatch<Action> | null>(null);
 
-export const useMIPS = (): [State, Dispatch<Action>] => {
-	const stateContext = useContext(StateContext);
+export const useMIPS = (): [MIPS, Dispatch<Action>] => {
+	const stateContext = useContext(MIPSContext);
 	const dispatchContext = useContext(DispatchContext);
 
 	if (!stateContext || !dispatchContext) {
@@ -43,16 +43,16 @@ export const useMIPS = (): [State, Dispatch<Action>] => {
 	}
 };
 
-const MIPS = ({ children }: PropsWithChildren) => {
+const MIPSProvider = ({ children }: PropsWithChildren) => {
 	const [state, dispatch] = useReducer(reducer, defaultValue);
 
 	return (
-		<StateContext.Provider value={state}>
+		<MIPSContext.Provider value={state}>
 			<DispatchContext.Provider value={dispatch}>
 				{children}
 			</DispatchContext.Provider>
-		</StateContext.Provider>
+		</MIPSContext.Provider>
 	);
 };
 
-export default MIPS;
+export default MIPSProvider;
