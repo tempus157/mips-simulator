@@ -13,7 +13,10 @@ const ToolbarContent = () => {
 		const reader = new FileReader();
 		reader.readAsText(file);
 		reader.onload = (e) => {
-			console.log(e.target?.result ?? "No result");
+			if (!e.target) {
+				throw new Error("FileReader error");
+			}
+			console.log(typeof e.target.result);
 		};
 		reader.onerror = () => {
 			console.log("error");
