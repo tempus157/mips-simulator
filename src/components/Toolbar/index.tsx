@@ -1,20 +1,10 @@
-import { useMIPS } from "@/libs/mips";
 import { AppBar, Box, Toolbar as AppBarContent } from "@mui/material";
+import { useState } from "react";
 import ToolbarContent from "./ToolbarContent";
 import ToolbarModal from "./ToolbarModal";
 
 const Toolbar = () => {
-	const [mips, dispatch] = useMIPS();
-
-	try {
-		const a = 10;
-	} catch (e) {
-		if (e instanceof Error) {
-			// Show e.message
-		} else {
-			console.log(`Unknown error: ${e}`);
-		}
-	}
+	const [message, setMessage] = useState<string | null>(null);
 
 	return (
 		<>
@@ -23,8 +13,8 @@ const Toolbar = () => {
 			</Box>
 			<AppBar position="fixed" sx={{ top: "auto", bottom: 0 }}>
 				<AppBarContent>
-					<ToolbarContent />
-					<ToolbarModal />
+					<ToolbarContent setMessage={setMessage} />
+					<ToolbarModal message={message} />
 				</AppBarContent>
 			</AppBar>
 		</>

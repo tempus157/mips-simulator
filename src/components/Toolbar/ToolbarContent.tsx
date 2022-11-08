@@ -1,27 +1,30 @@
-import { FormEvent } from "react";
+import { Dispatch, FormEvent, SetStateAction } from "react";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { PlayArrow, SkipNext, Stop, Upload } from "@mui/icons-material";
+import { useMIPS } from "@/libs/mips";
 
-const ToolbarContent = () => {
+interface ToolbarContentProps {
+	setMessage: Dispatch<SetStateAction<string | null>>;
+}
+
+const ToolbarContent = ({ setMessage }: ToolbarContentProps) => {
+	const [mips, dispatch] = useMIPS();
+
 	const handleLoad = (e: FormEvent<HTMLInputElement>) => {
-		const file = e.currentTarget.files?.[0];
-		if (!file) {
-			console.log("No file selected");
-			return;
-		}
-
-		const reader = new FileReader();
-		reader.readAsText(file);
-		reader.onload = (e) => {
-			if (!e.target) {
-				throw new Error("FileReader error");
+		try {
+			dispatch({ type: "LOAD", files: e.currentTarget.files });
+		} catch (error) {
+			if (error instanceof Error) {
+				setMessage(error.message);
+			} else {
+				console.error("Unknown error", error);
+				setMessage(
+					"An unknown error has occurred! See the console for details."
+				);
 			}
-			console.log(typeof e.target.result);
-		};
-		reader.onerror = () => {
-			console.log("error");
-		};
+		}
 	};
+
 	return (
 		<>
 			<input id="src" type="file" onInput={handleLoad} hidden />
