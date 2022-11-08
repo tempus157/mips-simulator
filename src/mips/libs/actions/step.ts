@@ -1,6 +1,6 @@
-import { MIPS } from "../reducer";
+import { MIPSState } from "../reducer";
 
 // TODO: Implement
-export const step = (mips: MIPS): MIPS => {
-	return mips;
+export const step = (state: MIPSState): MIPSState => {
+	return state;
 };

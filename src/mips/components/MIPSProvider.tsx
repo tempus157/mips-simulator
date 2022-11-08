@@ -1,6 +1,6 @@
-import { DispatchContext, StateContext } from "$/mips/libs/context";
-import { defaultValue, reducer } from "$/mips/libs/reducer";
 import { PropsWithChildren, useReducer } from "react";
+import { defaultValue, reducer } from "$/mips/libs/reducer";
+import { DispatchContext, StateContext } from "../libs/context";
 
 const MIPSProvider = ({ children }: PropsWithChildren) => {
 	const [state, dispatch] = useReducer(reducer, defaultValue);

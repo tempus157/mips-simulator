@@ -1,12 +1,20 @@
 import { createContext, Dispatch, useContext } from "react";
-import { MIPS, MIPSAction, MIPSError, MIPSErrorAction } from "./reducer";
+import {
+	MIPSState,
+	MIPSAction,
+	MIPSErrorState,
+	MIPSErrorAction,
+} from "./reducer";
 
-export const StateContext = createContext<(MIPS & MIPSError) | null>(null);
+export const StateContext = createContext<(MIPSState & MIPSErrorState) | null>(
+	null
+);
+
 export const DispatchContext = createContext<Dispatch<
 	MIPSAction | MIPSErrorAction
 > | null>(null);
 
-export const useMIPS = (): MIPS => {
+export const useMIPSState = (): MIPSState => {
 	const state = useContext(StateContext);
 
 	if (!state) {
@@ -16,7 +24,7 @@ export const useMIPS = (): MIPS => {
 	}
 };
 
-export const useMIPSMenu = (): Dispatch<MIPSAction> => {
+export const useMIPSDispatch = (): Dispatch<MIPSAction> => {
 	const dispatch = useContext(DispatchContext);
 
 	if (!dispatch) {

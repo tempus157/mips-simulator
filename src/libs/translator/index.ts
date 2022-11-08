@@ -1,4 +1,4 @@
-import { MIPSException } from "$/mips/libs/error";
+import { MIPSError } from "$/mips/libs/error";
 import { functMap, opcodeMap, registerMap, shift } from "./reference";
 
 interface Translator {
@@ -11,12 +11,12 @@ export const translateInstruction = (instructionText: string) => {
 		.filter((text) => text.length > 0);
 
 	if (instruction.length === 0) {
-		throw new MIPSException("Empty instruction");
+		throw new MIPSError("Empty instruction");
 	}
 
 	const translator = translatorMap.get(instruction[0]);
 	if (!translator) {
-		throw new MIPSException("Invalid instruction");
+		throw new MIPSError("Invalid instruction");
 	}
 	return translator(instruction);
 };
@@ -24,7 +24,7 @@ export const translateInstruction = (instructionText: string) => {
 const getOpcode = (opcode: string) => {
 	const result = opcodeMap.get(opcode);
 	if (result === undefined) {
-		throw new MIPSException(`Invalid opcode: ${opcode}`);
+		throw new MIPSError(`Invalid opcode: ${opcode}`);
 	}
 	return result;
 };
@@ -32,7 +32,7 @@ const getOpcode = (opcode: string) => {
 const getRegister = (register: string) => {
 	const result = registerMap.get(register);
 	if (result === undefined) {
-		throw new MIPSException(`Invalid register: ${register}`);
+		throw new MIPSError(`Invalid register: ${register}`);
 	}
 	return result;
 };
@@ -40,7 +40,7 @@ const getRegister = (register: string) => {
 const getFunct = (funct: string) => {
 	const result = functMap.get(funct);
 	if (result === undefined) {
-		throw new MIPSException(`Invalid funct: ${funct}`);
+		throw new MIPSError(`Invalid funct: ${funct}`);
 	}
 	return result;
 };
@@ -48,14 +48,14 @@ const getFunct = (funct: string) => {
 const getImmediate = (immediate: string) => {
 	const result = parseInt(immediate, 10);
 	if (isNaN(result)) {
-		throw new MIPSException(`Invalid immediate: ${immediate}`);
+		throw new MIPSError(`Invalid immediate: ${immediate}`);
 	}
 	return result;
 };
 
 const registerFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException("Invalid register format");
+		throw new MIPSError("Invalid register format");
 	}
 
 	return (
@@ -69,7 +69,7 @@ const registerFormat: Translator = (instruction: string[]) => {
 
 const shiftFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException("Invalid shift format");
+		throw new MIPSError("Invalid shift format");
 	}
 
 	return (
@@ -83,7 +83,7 @@ const shiftFormat: Translator = (instruction: string[]) => {
 
 const immediateFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException(`Invalid immediate format`);
+		throw new MIPSError(`Invalid immediate format`);
 	}
 
 	return (
@@ -96,7 +96,7 @@ const immediateFormat: Translator = (instruction: string[]) => {
 
 const dataFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 4) {
-		throw new MIPSException("Invalid data format");
+		throw new MIPSError("Invalid data format");
 	}
 
 	return (
@@ -109,7 +109,7 @@ const dataFormat: Translator = (instruction: string[]) => {
 
 const jumpFormat: Translator = (instruction: string[]) => {
 	if (instruction.length !== 2) {
-		throw new MIPSException("Invalid jump format");
+		throw new MIPSError("Invalid jump format");
 	}
 
 	return (

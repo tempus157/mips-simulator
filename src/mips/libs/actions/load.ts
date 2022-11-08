@@ -1,9 +1,9 @@
-import { MIPS } from "../reducer";
+import { MIPSState } from "../reducer";
 import { translateInstruction } from "$/libs/translator";
 
-export const load = (mips: MIPS, src: string): MIPS => {
+export const load = (state: MIPSState, src: string): MIPSState => {
 	const textMemory = src
 		.split("\n")
 		.map((instructionText) => translateInstruction(instructionText));
-	return { ...mips, textMemory };
+	return { ...state, textMemory };
 };

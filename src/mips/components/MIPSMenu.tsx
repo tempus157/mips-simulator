@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import { PlayArrow, SkipNext, Stop, Upload } from "@mui/icons-material";
-import { useMIPSMenu } from "$/mips/libs/context";
+import { useMIPSDispatch } from "$/mips/libs/context";
 
 import {
 	AppBar,
@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 const MIPSMenu = () => {
-	const dispatch = useMIPSMenu();
+	const dispatch = useMIPSDispatch();
 
 	const handleLoad = async (event: FormEvent<HTMLInputElement>) => {
 		const file = event.currentTarget.files?.[0];

@@ -1,19 +1,19 @@
 import { load, reset, run, step } from "./actions";
-import { withException } from "./error";
+import { withError } from "./error";
 
-export interface MIPS {
+export interface MIPSState {
 	programCounter: number;
 	register: number[];
 	dataMemory: number[];
 	textMemory: number[];
 }
 
-export interface MIPSError {
+export interface MIPSErrorState {
 	error: boolean;
 	message: string;
 }
 
-export const defaultValue: MIPS & MIPSError = {
+export const defaultValue: MIPSState & MIPSErrorState = {
 	programCounter: 0,
 	register: [0, 0, 0, 0, 0, 0, 0, 0],
 	dataMemory: [],
@@ -31,18 +31,18 @@ export type MIPSAction =
 export type MIPSErrorAction = { type: "CLOSE" };
 
 export const reducer = (
-	state: MIPS & MIPSError,
+	state: MIPSState & MIPSErrorState,
 	action: MIPSAction | MIPSErrorAction
-): MIPS & MIPSError => {
+): MIPSState & MIPSErrorState => {
 	switch (action.type) {
 		case "LOAD":
-			return withException(state, () => load(state, action.src));
+			return withError(state, () => load(state, action.src));
 		case "RESET":
-			return withException(state, () => reset(state));
+			return withError(state, () => reset(state));
 		case "RUN":
-			return withException(state, () => run(state));
+			return withError(state, () => run(state));
 		case "STEP":
-			return withException(state, () => step(state));
+			return withError(state, () => step(state));
 		case "CLOSE":
 			return { ...state, error: false };
 		default:
