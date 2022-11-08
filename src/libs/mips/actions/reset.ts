@@ -1,8 +1,8 @@
-import { defaultValue, MIPS } from "../reducer";
+import { defaultValue, MIPSWithError } from "../reducer";
 
-export const reset = (mips: MIPS): MIPS => {
+export const reset = (state: MIPSWithError): MIPSWithError => {
 	return {
-		...mips,
+		...state,
 		programCounter: defaultValue.programCounter,
 		register: defaultValue.register,
 	};

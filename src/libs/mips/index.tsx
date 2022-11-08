@@ -6,17 +6,39 @@ import {
 	useReducer,
 } from "react";
 
-import { Action, defaultValue, MIPS, reducer } from "./reducer";
+import {
+	defaultValue,
+	MIPS,
+	MIPSAction,
+	MIPSError,
+	MIPSErrorAction,
+	MIPSWithError,
+	MIPSWithErrorAction,
+	reducer,
+} from "./reducer";
 
-const MIPSContext = createContext<MIPS | null>(null);
-const DispatchContext = createContext<Dispatch<Action> | null>(null);
+const StateContext = createContext<MIPSWithError | null>(null);
+const DispatchContext = createContext<Dispatch<MIPSWithErrorAction> | null>(
+	null
+);
 
-export const useMIPS = (): [MIPS, Dispatch<Action>] => {
-	const stateContext = useContext(MIPSContext);
+export const useMIPS = (): [MIPS, Dispatch<MIPSAction>] => {
+	const stateContext = useContext(StateContext);
 	const dispatchContext = useContext(DispatchContext);
 
 	if (!stateContext || !dispatchContext) {
-		throw new Error("useMIPS must be used within a MIPS");
+		throw new Error("useMIPS must be used within a MIPSProvider");
+	} else {
+		return [stateContext, dispatchContext];
+	}
+};
+
+export const useMIPSError = (): [MIPSError, Dispatch<MIPSErrorAction>] => {
+	const stateContext = useContext(StateContext);
+	const dispatchContext = useContext(DispatchContext);
+
+	if (!stateContext || !dispatchContext) {
+		throw new Error("useMIPSError must be used within a MIPSProvider");
 	} else {
 		return [stateContext, dispatchContext];
 	}
@@ -26,11 +48,11 @@ const MIPSProvider = ({ children }: PropsWithChildren) => {
 	const [state, dispatch] = useReducer(reducer, defaultValue);
 
 	return (
-		<MIPSContext.Provider value={state}>
+		<StateContext.Provider value={state}>
 			<DispatchContext.Provider value={dispatch}>
 				{children}
 			</DispatchContext.Provider>
-		</MIPSContext.Provider>
+		</StateContext.Provider>
 	);
 };
 

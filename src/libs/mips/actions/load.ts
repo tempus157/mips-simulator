@@ -1,7 +1,10 @@
-import { MIPS } from "../reducer";
+import { MIPSWithError } from "../reducer";
 import { translateInstruction } from "@/libs/translator";
 
-export const load = (mips: MIPS, files: FileList | null): MIPS => {
+export const load = (
+	state: MIPSWithError,
+	files: FileList | null
+): MIPSWithError => {
 	const file = files?.[0];
 	if (!file) {
 		throw new Error("No file selected");
@@ -30,5 +33,5 @@ export const load = (mips: MIPS, files: FileList | null): MIPS => {
 	const textMemory = src
 		.split(" ")
 		.map((instructionText) => translateInstruction(instructionText));
-	return { ...mips, textMemory };
+	return { ...state, textMemory };
 };

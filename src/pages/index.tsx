@@ -6,6 +6,7 @@ import Toolbar from "@/components/Toolbar";
 import RegisterCard from "@/components/RegisterCard";
 import MemoryCard from "@/components/MemoryCard";
 import MIPSProvider from "@/libs/mips";
+import ErrorDialog from "@/components/ErrorDialog";
 
 const Home: NextPage = () => {
 	return (
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
 					</Grid>
 				</Box>
 				<Toolbar />
+				<ErrorDialog />
 			</MIPSProvider>
 		</>
 	);
