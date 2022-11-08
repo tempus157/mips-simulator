@@ -1,13 +1,10 @@
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
-import Title from "$/components/Title";
-
-import {
-	MIPSCard,
-	MIPSDialog,
-	MIPSMenu,
-	MIPSProvider,
-} from "$/mips/components";
+import { Typography } from "@mui/material";
+import MIPSProvider from "$/components/MIPSProvider";
+import MIPSCard from "$/components/MIPSCard";
+import MIPSMenu from "$/components/MIPSMenu";
+import MIPSDialog from "$/components/MIPSDialog";
 
 const Home: NextPage = () => {
 	return (
@@ -16,7 +13,9 @@ const Home: NextPage = () => {
 				title="MIPS Simulator - Tempus.js"
 				description="MIPS Simulator with a pipeline"
 			/>
-			<Title text="MIPS Simulator" />
+			<Typography m={3} variant="h5" align="center">
+				MIPS Simulator
+			</Typography>
 			<MIPSProvider>
 				<MIPSCard />
 				<MIPSMenu />
