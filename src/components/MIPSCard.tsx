@@ -1,9 +1,6 @@
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import { useMIPSState } from "$libs/mips/context";
 
 const MIPSCard = () => {
-	const state = useMIPSState();
-
 	const tempCard = (
 		<Card>
 			<CardContent>

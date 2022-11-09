@@ -22,6 +22,19 @@ export const defaultValue: MIPSState & MIPSErrorState = {
 	message: "",
 };
 
+export interface TestMIPSAction {
+	type: "LOAD" | "RESET" | "RUN" | "STEP";
+	src?: string;
+}
+
+export interface TestMIPSErrorAction {
+	type: "CLOSE";
+}
+
+export interface Action {
+	(state: MIPSState, action: TestMIPSAction): MIPSState;
+}
+
 export type MIPSAction =
 	| { type: "LOAD"; src: string }
 	| { type: "RESET" }
