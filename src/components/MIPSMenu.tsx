@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useCallback } from "react";
 import { PlayArrow, SkipNext, Stop, Upload } from "@mui/icons-material";
 import { useMIPSDispatch } from "$libs/mips/context";
 
@@ -13,14 +13,17 @@ import {
 const MIPSMenu = () => {
 	const dispatch = useMIPSDispatch();
 
-	const handleLoad = async (event: FormEvent<HTMLInputElement>) => {
-		const file = event.currentTarget.files?.[0];
-		if (!file) {
-			return;
-		}
-		dispatch({ type: "RESET" });
-		dispatch({ type: "LOAD", src: await file.text() });
-	};
+	const handleLoad = useCallback(
+		async (event: FormEvent<HTMLInputElement>) => {
+			const file = event.currentTarget.files?.[0];
+			if (!file) {
+				return;
+			}
+			dispatch({ type: "RESET" });
+			dispatch({ type: "LOAD", src: await file.text() });
+		},
+		[dispatch]
+	);
 
 	return (
 		<>
